@@ -7,6 +7,8 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
+import java.io.FileNotFoundException;
+
 import static io.restassured.RestAssured.given;
 
 public class GetAPI {
@@ -15,8 +17,8 @@ public class GetAPI {
     Response response;
 
     @When("Get call to {string} API")
-    public void getCallToAPI(String url) {
-        System.out.println("Calling API");
+    public void getCallToAPI(String url) throws FileNotFoundException {
+        System.out.println("Calling API " + url );
         response = given().spec(Utils.getRequestSpec()).when().get(url).then().extract().response();
         System.out.println(response);
 
